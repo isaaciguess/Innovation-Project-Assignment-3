@@ -1,20 +1,23 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
+import Container from 'react-bootstrap/Container';
 
-const Navbar = () => {
+const MyNavbar = () => {
     return (
-        <div className='navBar'>
-        <div className='home'>
-            <Link to="/">Home</Link>
-        </div>
-        <div className='analytics'>
-            <Link to="/analytics">Analytics</Link>
-        </div>
-            <div className='prediction'>
-                <Link to="/prediction">Predict Property Price</Link>
-            </div>
-        </div>
+        <>
+        <Navbar bg="light" data-bs-theme="light">
+            <Container>
+            <Nav className="me-auto">
+                <Link className="nav-link" to="/">Home</Link>
+                <Link className="nav-link" to="/prediction">predictor</Link>
+                <Link className="nav-link" to="/analytics">analytics</Link>
+            </Nav>
+            </Container>
+        </Navbar>
+        </>
     );
 }
 
-export default Navbar;
+export default MyNavbar;
