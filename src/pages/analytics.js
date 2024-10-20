@@ -1,7 +1,7 @@
 //
 import React from "react";
-import ChartSelection from "./chart_selection_component";
-import ChartRenderer from "./chart_renderer_component";
+import ChartSelection from "../components/chartSelection";
+import ChartRenderer from "../components/chartRenderer";
 import { Container } from "react-bootstrap";
 
 export default class AnalyticsPage extends React.Component {

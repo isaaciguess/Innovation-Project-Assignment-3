@@ -1,8 +1,8 @@
 import React from 'react';
-import MyNavbar from './nav_bar_component';
-import HomePage from './home_page';
-import AnalyticsPage from './analytics_page';
-import PredictionPage from './prediction_page';
+import MyNavbar from './components/navbar'; 
+import HomePage from './pages/home';
+import AnalyticsPage from './pages/analytics';
+import PredictionPage from './pages/prediction';
 import { Routes, Route } from 'react-router-dom';
 
 

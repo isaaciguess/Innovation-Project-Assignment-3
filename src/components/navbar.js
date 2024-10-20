@@ -11,8 +11,8 @@ const MyNavbar = () => {
             <Container>
             <Nav className="me-auto">
                 <Link className="nav-link" to="/">Home</Link>
-                <Link className="nav-link" to="/prediction">predictor</Link>
-                <Link className="nav-link" to="/analytics">analytics</Link>
+                <Link className="nav-link" to="/prediction">Predictor</Link>
+                <Link className="nav-link" to="/analytics">Analytics</Link>
             </Nav>
             </Container>
         </Navbar>
