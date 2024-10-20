@@ -8,12 +8,6 @@
     color: white;
   }
   
-  /* Overlay text styles */
-  .header-text {
-    top: 50%;
-    left: 50%;
-    text-align: center;
-  }
   
   .banner-text {
     position: absolute;
