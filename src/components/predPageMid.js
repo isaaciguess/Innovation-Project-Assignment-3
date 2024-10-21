@@ -1,5 +1,7 @@
 import React from 'react';
-import { Container, Row, Col } from 'react-bootstrap';
+import { Container, Row, Col, Button } from 'react-bootstrap';
+import MyModal  from './advancedSearchModal';
+import AdvancedSearchModal from './advancedSearchModal';
 
 const PredictionPageMid = () => {
     return (
@@ -13,7 +15,7 @@ const PredictionPageMid = () => {
         
         {/* Right-Aligned Column */}
         <Col xs="auto" className="ms-auto p-0">
-            <a href="#">Advanced Search</a>
+            <AdvancedSearchModal />
         </Col>
         </Row>
         </Container>

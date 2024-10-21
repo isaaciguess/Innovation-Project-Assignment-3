@@ -1,16 +1,34 @@
-// this file contains the code for the advanced search modal component
-import React from 'react';
+import React from "react";
+import { useState } from "react";
 
-export default class AdvancedSearchModal extends React.Component {
-  render() {
-    return (
-        <div className="advanced-search-modal">
-            <h1>Advanced Search</h1>
-            <form>
-                <input type="text" placeholder="Search..." />
-                <button>Search</button>
-            </form>
-        </div>
+import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
+import ModalForm from "./modalForm";
+function AdvancedSearchModal() {
+    const [show, setShow] = useState(false);
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+  return (
+      <>
+        <Button variant="primary" onClick={handleShow}>
+          Advanced Search
+        </Button>
+        <Modal show={show} onHide={handleClose}>
+          <Modal.Header closeButton>
+            <Modal.Title>Modal heading</Modal.Title>
+          </Modal.Header>
+          <Modal.Body><ModalForm/></Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={handleClose}>
+              Cancel
+            </Button>
+            <Button variant="primary" onClick={handleClose}>
+              Add To Prediction
+            </Button>
+          </Modal.Footer>
+        </Modal>
+      </>
     );
-  }
 }
+
+export default AdvancedSearchModal;
