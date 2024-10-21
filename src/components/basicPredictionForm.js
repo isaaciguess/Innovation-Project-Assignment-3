@@ -22,7 +22,7 @@ export function BasicPredictionForm(){
     const [bathrooms, setBathrooms] = useState("");
     const [squareMeters, setSquareMeters] = useState("");
     const [distanceFromCBD, setDistanceFromCBD] = useState("");
-    const [yearBuilt, setYearBuilt] = useState("");
+    const [yearBuilt, setType] = useState("");
     const [suburb, setSuburb] = useState("");
 
     const handleSelectChange = (setter) => (e) => {
@@ -78,7 +78,7 @@ export function BasicPredictionForm(){
           onChange={handleInputChange(setSquareMeters)}
           />
         </Form.Group>
-        </div>
+      </div>
 
         <div className="col-md-6">
         <Form.Group className="mb-3" controlId="distanceFromCBD">
@@ -93,11 +93,11 @@ export function BasicPredictionForm(){
 
       <div className="row g-3">
         <div className="col-md-6">
-        <Form.Group className="mb-3" controlId="yearBuilt">
-          <Form.Label> Year Built</Form.Label>
-          <Form.Control type="text" placeholder="Custom"
+        <Form.Group className="mb-3" controlId="type">
+          <Form.Label> type </Form.Label>
+          <Form.Control type="text" placeholder="type"
           value={yearBuilt}
-          onChange={handleInputChange(setYearBuilt)}
+          onChange={handleInputChange(setType)}
           />
         </Form.Group>
         </div>
