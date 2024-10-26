@@ -10,10 +10,9 @@ function ModalForm() {
     const [mdIncome, setMdInc] = useState("");
     const [subLat, setLat] = useState("");
     const [subLong, setLong] = useState("");
-    const [numPark, setParks] = useState("");
-    const [subPop, setPop] = useState("");
-
-
+    const [yearBuilt, setType] = useState("");
+    const [suburb, setSuburb] = useState("");
+    
     const handleSelectChange = (setter) => (e) => {
       setter(e.target.value);
     };
@@ -71,22 +70,22 @@ function ModalForm() {
 
         <div className="row g-3">
         <div className="col-md-6">
-        <Form.Group className="mb-3" controlId="numPark">
-          <Form.Label> Number of Parks </Form.Label>
-          <Form.Control type="text" placeholder="Enter Number of Parks" 
-          value={numPark}
-          onChange={handleInputChange(setParks)}
+        <Form.Group className="mb-3" controlId="type">
+          <Form.Label> type </Form.Label>
+          <Form.Control type="text" placeholder="type"
+          value={yearBuilt}
+          onChange={handleInputChange(setType)}
           />
         </Form.Group>
         </div>
 
         <div className="col-md-6">
-        <Form.Group className="mb-3" controlId="subPop">
-          <Form.Label> Suburb Longtitude </Form.Label>
-          <Form.Control type="text" placeholder="Enter Suburb Population"
-          value={subPop}
-          onChange={handleInputChange(setPop)}          
-        />
+        <Form.Group className="mb-3" controlId="suburb">
+          <Form.Label> Suburb</Form.Label>
+          <Form.Control type="text" placeholder="Suburb"
+          value={suburb}
+          onChange={handleInputChange(setSuburb)}
+          />
         </Form.Group>
         </div>
         </div>
