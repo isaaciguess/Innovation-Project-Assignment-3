@@ -2,7 +2,6 @@
 import React from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import { useState } from 'react';
 
 /*
 This is the basic prediction form component, all fields are required
@@ -16,64 +15,20 @@ This is the basic prediction form component, all fields are required
 */
 
 
-export function BasicPredictionForm({onPrediction}){
+export function BasicPredictionForm({formData, onInputChange, onSubmit}){
   {
 
-    const [bedrooms, setBedrooms] = useState("");
-    const [bathrooms, setBathrooms] = useState("");
-    const [squareMeters, setSquareMeters] = useState("");
-    const [distanceFromCBD, setDistanceFromCBD] = useState("");
-    const [numPark, setParks] = useState("");
-    const [subPop, setPop] = useState("");
-
-    
-
-    const handleSelectChange = (setter) => (e) => {
-      setter(e.target.value);
-    };
-
-    const handleInputChange = (setter) => (e) => {
-      setter(e.target.value);
-    };
-
-    const handleSubmit = (e) => {
-      e.preventDefault(); // Prevent the default form submission
-  
-      const data = {
-        num_bath: parseFloat(bathrooms),
-        num_bed: parseFloat(bedrooms),
-        num_parking: parseFloat(numPark),
-        property_size: parseFloat(squareMeters),
-        suburb_lng: parseFloat(subPop),
-        km_from_cbd: parseFloat(distanceFromCBD),
-      };
-
-      console.log('Data being sent:', data);
-  
-      fetch('http://localhost:8000/run_model', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          console.log('Predicted price:', data.predicted_price);
-          onPrediction(data.predicted_price);
-        })
-        .catch((error) => {
-          console.error('Error:', error);
-        });
-    };
-
     return (
-      <Form onSubmit={handleSubmit}>
+      <Form onSubmit={onSubmit}>
       <div className="row g-3">
         <div className="col-md-6">
         <Form.Group className="mb-3" controlId="bedrooms">
           <Form.Label> Bedrooms</Form.Label>
-          <Form.Select aria-label="Bedrooms"
-          value={bedrooms}
-          onChange={handleSelectChange(setBedrooms)}
+          <Form.Select
+          name="bedrooms"
+          aria-label="Bedrooms"
+          value={formData.bedrooms}
+          onChange={onInputChange}
           type="number"
           >
           <option value="1">1</option>
@@ -88,9 +43,11 @@ export function BasicPredictionForm({onPrediction}){
         <div className="col-md-6">
         <Form.Group className="mb-3" controlId="bathrooms">
           <Form.Label> Bathrooms</Form.Label>
-          <Form.Select aria-label="Bathrooms"
-          value={bathrooms}
-          onChange={handleSelectChange(setBathrooms)}
+          <Form.Select 
+          name="bathrooms"
+          aria-label="Bathrooms"
+          value={formData.bathrooms}
+          onChange={onInputChange}
           type="number"
           >
           <option value="1">1</option>
@@ -107,9 +64,12 @@ export function BasicPredictionForm({onPrediction}){
         <div className="col-md-6">
         <Form.Group className="mb-3" controlId="squareMeters">
           <Form.Label> Square Meters</Form.Label>
-          <Form.Control type="number" placeholder="Enter Size (sqm)" 
-          value={squareMeters}
-          onChange={handleInputChange(setSquareMeters)}
+          <Form.Control 
+          name='squareMeters'
+          type="number" 
+          placeholder="Enter Size (sqm)" 
+          value={formData.squareMeters}
+          onChange={onInputChange}
           />
         </Form.Group>
       </div>
@@ -117,9 +77,12 @@ export function BasicPredictionForm({onPrediction}){
         <div className="col-md-6">
         <Form.Group className="mb-3" controlId="distanceFromCBD">
           <Form.Label> Distance from CBD</Form.Label>
-          <Form.Control type="number" placeholder="Enter Distance From CBD"
-          value={distanceFromCBD}
-          onChange={handleInputChange(setDistanceFromCBD)}          
+          <Form.Control 
+          name='distanceFromCBD'
+          type="number" 
+          placeholder="Enter Distance From CBD"
+          value={formData.distanceFromCBD}
+          onChange={onInputChange}          
           />
         </Form.Group>
         </div>
@@ -130,19 +93,25 @@ export function BasicPredictionForm({onPrediction}){
         <div className="col-md-6">
         <Form.Group className="mb-3" controlId="numPark">
           <Form.Label> Number of Parks </Form.Label>
-          <Form.Control type="number" placeholder="Enter Number of Parks" 
-          value={numPark}
-          onChange={handleInputChange(setParks)}
+          <Form.Control
+          name="numPark"
+          type="number"
+          placeholder="Enter Number of Parks" 
+          value={formData.numPark}
+          onChange={onInputChange}
           />
         </Form.Group>
         </div>
 
         <div className="col-md-6">
         <Form.Group className="mb-3" controlId="subPop">
-          <Form.Label> Suburb Longttitude </Form.Label>
-          <Form.Control type="number" placeholder="Enter Suburb Population"
-          value={subPop}
-          onChange={handleInputChange(setPop)}          
+          <Form.Label> Suburb Longtitude </Form.Label>
+          <Form.Control 
+          name="subPop"
+          type="number"
+          placeholder="Enter Suburb Population"
+          value={formData.subPop}
+          onChange={onInputChange}          
         />
         </Form.Group>
         </div>
