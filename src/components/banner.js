@@ -6,7 +6,7 @@ const PriceRangeBanner = ({predictedPrice}) => {
  
       <div className="header-banner">
         <div className="banner-text">
-          <h1>Predicted Price: ${predictedPrice ? predictedPrice : 'N/A'}</h1>
+          <h1>Predicted Price: ${predictedPrice ? predictedPrice : 'Complete Form'}</h1>
         </div>
       </div>
   );
