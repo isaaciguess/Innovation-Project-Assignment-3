@@ -13,7 +13,8 @@ function ChartRenderer({ formData, chartData }) {
 
   console.log('Feature Data:', featureData);
   console.log('Price Data:', priceData);
-  
+  console.log('Chart:', chart);
+  console.log('Feature:', feature);
 
   if (!featureData.length) {
     return <p>Please select a valid feature to display the chart.</p>;
@@ -29,7 +30,7 @@ function ChartRenderer({ formData, chartData }) {
           counts[value] = (counts[value] || 0) + 1;
           return counts;
         }, {}),
-        backgroundColor: 'rgba(75, 192, 192, 0.6)',
+        backgroundColor: 'rgba(75, 192, 192, 0.6)', 
       },
     ],
   };
