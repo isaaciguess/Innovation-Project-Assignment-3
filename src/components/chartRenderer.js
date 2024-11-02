@@ -9,7 +9,7 @@ function ChartRenderer({ formData, chartData }) {
 
   // Prepare data based on feature selection
   const featureData = chartData[feature] || [];;
-  const priceData = chartData.price;
+  const priceData = chartData.Price;
 
   console.log('Feature Data:', featureData);
   console.log('Price Data:', priceData);

@@ -2,6 +2,7 @@ import React from "react";
 import ChartSelection from "../components/chartSelection";
 import ChartRenderer from "../components/chartRenderer";
 import { Container } from "react-bootstrap";
+import { useEffect, useState } from "react";
 
 function AnalyticsPage(props) {
     const [formData, setFormData] = React.useState({
@@ -9,12 +10,15 @@ function AnalyticsPage(props) {
       feature: ''
     })
 
-    const chartData = {
-      bedrooms: [1, 1, 2, 3, 3, 3 , 4],
-      bathrooms:[1, 1, 2, 2, 2, 3, 4],
-      price: [100, 120, 150, 200, 250, 300, 350]  
-    };
-    
+    const[chartData, setChartData] = useState([null]);
+    useEffect(() => {
+      fetch("http://localhost:8000/get_chart_data")
+        .then(response => response.json())
+        .then(data => setChartData(data))
+        .catch(error => console.error("Error fetching data:", error));
+    }, []);
+
+    console.log(`file data ${chartData}`);
 
     const handleInputChange = (e) => {
       const { name, value } = e.target;
@@ -25,13 +29,15 @@ function AnalyticsPage(props) {
       }));
     }
 
+    const chartable_features = Object.keys(chartData).filter(key => key !== 'Price');
+
     return (
       <div>
         <Container>
         <h1>Analytics</h1>
         </Container>
         <Container>
-          <ChartSelection formData={formData} onInputChange={handleInputChange}/>
+          <ChartSelection features={chartable_features} formData={formData} onInputChange={handleInputChange}/>
         </Container>
         <Container>
         <ChartRenderer formData={formData} chartData={chartData} />

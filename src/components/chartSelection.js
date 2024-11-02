@@ -2,7 +2,7 @@
 import React from "react";
 import Bootstrap from "bootstrap"
 import Form from 'react-bootstrap/Form';
-function ChartSelection({formData, onInputChange}) {  
+function ChartSelection({features, formData, onInputChange}) {  
       return (
         <Form>
         <div className="row g-3">
@@ -31,8 +31,11 @@ function ChartSelection({formData, onInputChange}) {
           value={formData.feature}
           onChange={onInputChange}
           >
-          <option value="bedrooms">Bedrooms</option>
-          <option value="bathrooms">Bathrooms</option>
+          {features.map((feature) => (
+          <option key={feature} value={feature}>
+            {feature.charAt(0).toUpperCase() + feature.slice(1)}
+          </option>
+          ))}
           </Form.Select>
         </Form.Group>
         </div>
