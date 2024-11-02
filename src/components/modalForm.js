@@ -51,13 +51,13 @@ function ModalForm({onInputChange, formData}) {
           </div>
 
           <div className="col-md-6">
-            <Form.Group className="mb-3" controlId="subLong">
+            <Form.Group className="mb-3" controlId="subPop">
               <Form.Label> Suburb Longtitude </Form.Label>
               <Form.Control 
                 type="text" 
-                placeholder="Enter Suburb Longitude"
-                name="subLong"
-                value={formData.subLong}
+                placeholder="Enter Suburb Population"
+                name="subPop"
+                value={formData.subPop}
                 onChange={onInputChange}
               />
             </Form.Group>

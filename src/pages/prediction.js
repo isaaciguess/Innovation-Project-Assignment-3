@@ -11,21 +11,19 @@ function PredictionPage(props){
   const [predictedPrice, setPredictedPrice] = useState(null); 
 
   const [basicFormData, setBasicFormData] = useState({ 
-    bedrooms: '',
-    bathrooms: '',
+    bedrooms: '1',
+    bathrooms: '1',
     squareMeters: '',
     distanceFromCBD: '',
     numPark: '',
-    subPop: '',
+    subLong: '',
   });
 
   const [advancedFormData, setAdvancedFormData] = useState({
     subSkm: '',
     mdIncome: '',
     subLat: '',
-    subLong: '',
-    type: '',
-    suburb: ''
+    subPop: '',
   });
 
   const handlePrediction = (price) => {
@@ -52,34 +50,63 @@ function PredictionPage(props){
   const handleSubmit = (e) => {
     e.preventDefault(); // Prevent the default form submission
 
+    if(advancedFormData.subSkm === '') {
+      advancedFormData.subSkm = 3.323
+    }
+    if(advancedFormData.mdIncome === '') {
+      advancedFormData.mdIncome = 39208.0
+    }
+    if(advancedFormData.subLat === '') {
+      advancedFormData.subLat = -33.81479
+    }
+    if(advancedFormData.subPop === '') {
+      advancedFormData.subPop = 7616.0
+    }
     const combinedData = {
-      ...basicFormData,
-      ...advancedFormData
+      num_bed: parseFloat(basicFormData.bedrooms),
+      num_bath: parseFloat(basicFormData.bathrooms),
+      property_size: parseFloat(basicFormData.squareMeters),
+      km_from_cbd: parseFloat(basicFormData.distanceFromCBD),
+      num_parking: parseFloat(basicFormData.numPark),
+      suburb_lng: parseFloat(basicFormData.subLong),
+      suburb_sqkm: parseFloat(advancedFormData.subSkm),
+      suburb_median_income: parseFloat(advancedFormData.mdIncome),
+      suburb_lat: parseFloat(advancedFormData.subLat),
+      suburb_population: parseFloat(advancedFormData.subPop),
     };
 
-    const model_data = {
-      num_bath: parseFloat(combinedData.bathrooms),
-      num_bed: parseFloat(combinedData.bedrooms),
-      num_parking: parseFloat(combinedData.numPark),
-      property_size: parseFloat(combinedData.squareMeters),
-      suburb_lng: parseFloat(combinedData.subPop),
-      km_from_cbd: parseFloat(combinedData.distanceFromCBD),
-    };
-    console.log('Data being sent:', model_data);
+
     console.log('Combined Data:', combinedData);
 
     fetch('http://localhost:8000/run_model', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(model_data),
+      body: JSON.stringify(combinedData),
     })
       .then((response) => response.json())
-      .then((model_data) => {
-        console.log('Predicted price:', model_data.predicted_price);
-        setPredictedPrice(model_data.predicted_price);
+      .then((combinedData) => {
+        console.log('Predicted price:', combinedData.predicted_price);
+        setPredictedPrice(combinedData.predicted_price);
       })
       .catch((error) => {
         console.error('Error:', error);
+      });
+
+
+      setBasicFormData({
+        bedrooms: '1',
+        bathrooms: '1',
+        squareMeters: '',
+        distanceFromCBD: '',
+        numPark: '',
+        subLong: '',
+      });
+    
+      setAdvancedFormData({
+        subSkm: '',
+        mdIncome: '',
+        subLat: '',
+        subPop: '',
       });
   };
 

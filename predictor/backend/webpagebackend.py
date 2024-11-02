@@ -23,7 +23,12 @@ class PredictionInput(BaseModel):
     num_parking: float = Field(..., description="Number of car spaces")
     property_size: float = Field(...,description="Property size(in sqm)")
     km_from_cbd: float = Field(..., description="Suburb Population")
-    suburb_lng: float = Field(..., description="Suburb size(in sqkm)")
+    suburb_lng: float = Field(..., description="Suburb Longitude")
+    suburb_sqkm: float = Field(..., description="Suburb Size (sqkm)")   
+    suburb_median_income: float = Field(..., description="Suburb median income")
+    suburb_lat: float = Field(..., description="Suburb Latitude")   
+    suburb_population: float = Field(..., description="Suburb Population")
+
 
 
 @app.get("/get_chart_data")
@@ -31,7 +36,6 @@ async def get_data():
     current_dir = os.getcwd()
     relative_path = os.path.join("src\\assets\\data", "filtered_file.csv")
     path = os.path.join(current_dir, relative_path)
-    print(path)
     df = pd.read_csv(path)
     data =  df.to_dict(orient="list")
 
@@ -44,7 +48,7 @@ async def get_data():
         "suburb_lng": "Suburb Longitude",
         "suburb_lat": "Suburb Latitude",
         "suburb_population": "Suburb Population",
-        "suburb_skm": "Suburb Size (sqkm)",
+        "suburb_sqkm": "Suburb Size (sqkm)",
         "suburb_median_income": "Suburb Median Income",
         "price": "Price",
         "type": "Property Type" 
@@ -68,7 +72,10 @@ async def predict_price(input: PredictionInput):
     # Call the machine learning model's predict function to get the price
     data = [[input.num_bed, input.num_bath, 
              input.property_size, input.km_from_cbd, 
-             input.num_parking, input.suburb_lng]]   
+             input.num_parking, input.suburb_lng,
+             input.suburb_sqkm, input.suburb_median_income,
+             input.suburb_lat, input.suburb_population
+             ]]   
     
     price = model.predict(data)[0]
     # Return the predicted price in a dictionary (JSON response)

@@ -104,13 +104,13 @@ export function BasicPredictionForm({formData, onInputChange, onSubmit}){
         </div>
 
         <div className="col-md-6">
-        <Form.Group className="mb-3" controlId="subPop">
+        <Form.Group className="mb-3" controlId="subLong">
           <Form.Label> Suburb Longtitude </Form.Label>
           <Form.Control 
-          name="subPop"
+          name="subLong"
           type="number"
-          placeholder="Enter Suburb Population"
-          value={formData.subPop}
+          placeholder="Enter Suburb Longitude"
+          value={formData.subLong}
           onChange={onInputChange}          
         />
         </Form.Group>
