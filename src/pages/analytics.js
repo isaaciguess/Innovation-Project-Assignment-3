@@ -50,8 +50,8 @@ function AnalyticsPage(props) {
 
 // Define compatible features for each chart type
 const compatibleFeatures = {
-  bar: ["Number of Bedrooms", "Number of Bathrooms", "Number of Car Spaces", "Property Type" ],
-  pie: ["Number of Bedrooms", "Number of Bathrooms", "Number of Car Spaces", "Property Type" ],
+  bar: ["Number of Bedrooms", "Number of Bathrooms",  "Number of Car Spaces", "Property Type" ],
+  pie: ["Number of Bedrooms", "Number of Bathrooms",  "Number of Car Spaces", "Property Type" ],
   scatter: ["Suburb Longitude", "Suburb Latitude", "Distance from CBD (km)", "Property Size (sqm)", "Suburb Population", "Suburb Median Income"]
 };
 

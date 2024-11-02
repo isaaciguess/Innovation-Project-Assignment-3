@@ -40,7 +40,7 @@ async def get_data():
         "num_bath": "Number of Bathrooms",
         "property_size": "Property Size (sqm)",
         "km_from_cbd": "Distance from CBD (km)",
-        "num_parks": "Number of Car Spaces",
+        "num_parking": "Number of Car Spaces",
         "suburb_lng": "Suburb Longitude",
         "suburb_lat": "Suburb Latitude",
         "suburb_population": "Suburb Population",
