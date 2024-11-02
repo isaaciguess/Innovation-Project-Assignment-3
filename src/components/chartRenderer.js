@@ -114,6 +114,7 @@ function ChartRenderer({ formData, chartData }) {
           }}
           options={{
             responsive: true,
+            aspectRatio: 1.5,
             plugins: {
               title: {
                 display: true,

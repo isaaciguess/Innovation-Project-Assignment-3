@@ -8,7 +8,7 @@ function AnalyticsPage(props) {
 
   const [filteredFeatures, setFilteredFeatures] = useState([]);
   const [formData, setFormData] = React.useState({
-    chart: 'Bar',
+    chart: 'bar',
     feature: 'Number of Bedrooms'
   })
 
