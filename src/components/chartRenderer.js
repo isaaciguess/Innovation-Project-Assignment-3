@@ -1,5 +1,5 @@
 import React from "react";
-import { Bar, Pie, Scatter } from "react-chartjs-2";
+import { Bar, Pie, Scatter, Chart } from "react-chartjs-2";
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, PointElement, LineElement, Title, Tooltip, Legend, ArcElement } from 'chart.js';
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, PointElement, LineElement, Title, Tooltip, Legend, ArcElement);

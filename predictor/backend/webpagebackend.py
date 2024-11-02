@@ -52,8 +52,6 @@ async def get_data():
 
     data = {updated_keys.get(k, k): v for k, v in data.items()}
 
-    print(data)
-
     return data
 
 

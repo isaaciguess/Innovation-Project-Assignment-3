@@ -5,10 +5,12 @@ import { Container } from "react-bootstrap";
 import { useEffect, useState } from "react";
 
 function AnalyticsPage(props) {
-    const [formData, setFormData] = React.useState({
-      chart: '',
-      feature: ''
-    })
+
+  const [filteredFeatures, setFilteredFeatures] = useState([]);
+  const [formData, setFormData] = React.useState({
+    chart: 'Bar',
+    feature: 'Number of Bedrooms'
+  })
 
     const[chartData, setChartData] = useState([null]);
     useEffect(() => {
@@ -18,7 +20,22 @@ function AnalyticsPage(props) {
         .catch(error => console.error("Error fetching data:", error));
     }, []);
 
-    console.log(`file data ${chartData}`);
+
+      // Update filtered features based on selected chart type
+  useEffect(() => {
+    if (formData.chart) {
+      const compatible = compatibleFeatures[formData.chart] || [];
+      setFilteredFeatures(Object.keys(chartData).filter((feature) => compatible.includes(feature)));
+
+      // Reset feature if it’s not compatible with the current chart type
+      if (!compatible.includes(formData.feature)) {
+        setFormData((prevData) => ({
+          ...prevData,
+          feature: '' // Reset feature to an empty value or a compatible default
+        }));
+      }
+    }
+  }, [formData.chart, chartData]); // Run whenever chart type or data changes
 
     const handleInputChange = (e) => {
       const { name, value } = e.target;
@@ -29,7 +46,14 @@ function AnalyticsPage(props) {
       }));
     }
 
-    const chartable_features = Object.keys(chartData).filter(key => key !== 'Price');
+
+
+// Define compatible features for each chart type
+const compatibleFeatures = {
+  bar: ["Number of Bedrooms", "Number of Bathrooms", "Number of Car Spaces", "Property Type" ],
+  pie: ["Number of Bedrooms", "Number of Bathrooms", "Number of Car Spaces", "Property Type" ],
+  scatter: ["Suburb Longitude", "Suburb Latitude", "Distance from CBD (km)", "Property Size (sqm)", "Suburb Population", "Suburb Median Income"]
+};
 
     return (
       <div>
@@ -37,7 +61,7 @@ function AnalyticsPage(props) {
         <h1>Analytics</h1>
         </Container>
         <Container>
-          <ChartSelection features={chartable_features} formData={formData} onInputChange={handleInputChange}/>
+          <ChartSelection features={filteredFeatures} formData={formData} onInputChange={handleInputChange}/>
         </Container>
         <Container>
         <ChartRenderer formData={formData} chartData={chartData} />
