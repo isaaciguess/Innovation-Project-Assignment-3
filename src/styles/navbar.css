@@ -1,0 +1,17 @@
+.custom-navbar {
+    height: 80px;
+}
+
+.nav-link.active {
+    font-weight: bold; 
+}
+
+.custom-navbar .nav-link{
+    font-size: 1.3rem;
+    color: grey;
+}
+
+.custom-navbar .brand-text {
+    font-size: 2rem; 
+    color: grey; 
+}
