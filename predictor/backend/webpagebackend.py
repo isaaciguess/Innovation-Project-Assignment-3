@@ -36,19 +36,17 @@ async def get_suburbs():
     path = os.path.join(current_dir, relative_path)
     df = pd.read_csv(path)
     data =  df.to_dict(orient="list")
-
+    print(data)
     return data
 
 @app.get("/get_property_types")
 async def get_property_types():
     current_dir = os.getcwd()
-    relative_path = os.path.join("src\\assets\\data", "property_types.csv")
+    relative_path = os.path.join("src\\assets\\data", "types.csv")
     path = os.path.join(current_dir, relative_path)
     df = pd.read_csv(path)
     data =  df.to_dict(orient="list")
-
     return data
-
 
 @app.get("/get_chart_data")
 async def get_data():
@@ -80,7 +78,7 @@ async def get_data():
 
 @app.post("/run_model")
 async def predict_price(input: PredictionInput):
-        # Get the current working directory
+    # Get the current working directory
     current_dir = os.getcwd()
     # Define the relative path to the joblib file
     relative_path = os.path.join("predictor\\backend\\model", "hgbr_model.joblib")

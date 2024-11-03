@@ -1,10 +1,29 @@
 import React from "react";
 import { useState } from "react";
-
+import { useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 
 function ModalForm({ errors, handleBlur, onInputChange, formData }) {
+  const [suburbs, setSuburbs] = useState([null]);
+  const [propertyTypes, setPropertyTypes] = useState([]);
+
+
+  // Fetch suburbs and property types when the component mounts
+  useEffect(() => {
+    // Fetch suburbs
+    fetch('http://localhost:8000/get_suburbs')
+      .then(response => response.json())
+      .then(data => setSuburbs(data.surburb)) // assuming data has a "suburb" key containing a list of suburbs
+      .catch(error => console.error('Error fetching suburbs:', error));
+
+    // Fetch property types
+    fetch('http://localhost:8000/get_property_types')
+      .then(response => response.json())
+      .then(data => setPropertyTypes(data.type)) // assuming data has a "property_types" key containing a list of property types
+      .catch(error => console.error('Error fetching property types:', error));
+  }, []);
+
   return (
     <>
       <Form>
@@ -88,26 +107,40 @@ function ModalForm({ errors, handleBlur, onInputChange, formData }) {
           <div className="col-md-6">
             <Form.Group className="mb-3" controlId="type">
               <Form.Label> type </Form.Label>
-              <Form.Control
+              <Form.Select
                 type="text"
                 placeholder="type"
                 name="type"
                 value={formData.type}
                 onChange={onInputChange}
-              />
+              >
+              <option value="">Select Property Type</option>
+              {propertyTypes.map((type) => (
+                <option key={type} value={type}>
+                  {type}
+                </option>
+              ))}
+              </Form.Select>  
             </Form.Group>
           </div>
 
           <div className="col-md-6">
             <Form.Group className="mb-3" controlId="suburb">
               <Form.Label> Suburb</Form.Label>
-              <Form.Control
+              <Form.Select
                 type="text"
                 placeholder="Suburb"
                 name="suburb"
                 value={formData.suburb}
                 onChange={onInputChange}
-              />
+              >
+              <option value="">Select Suburb</option>
+              {suburbs && suburbs.map((suburb, index) => (
+                <option key={index} value={suburb}>
+                  {suburb}
+                </option>
+              ))}
+              </Form.Select>  
             </Form.Group>
           </div>
         </div>

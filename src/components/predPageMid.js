@@ -3,7 +3,6 @@ import "../styles/predpagemid.css";
 
 import React from 'react';
 import { Container, Row, Col, Button } from 'react-bootstrap';
-import MyModal from './advancedSearchModal';
 import AdvancedSearchModal from './advancedSearchModal';
 
 const PredictionPageMid = ({ errors, handleBlur, onInputChange, formData }) => {

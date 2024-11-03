@@ -13,11 +13,11 @@ function AdvancedSearchModal({ errors, handleBlur, onInputChange, formData }) {
   return (
     <>
       <Button variant="primary" className="btn-as-text" onClick={handleShow}>
-        Advanced Search
+        Advanced Prediction
       </Button>
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Modal heading</Modal.Title>
+          <Modal.Title>Advanced Options</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <ModalForm errors={errors} handleBlur={handleBlur} onInputChange={onInputChange} formData={formData} />
