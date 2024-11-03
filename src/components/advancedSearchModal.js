@@ -4,13 +4,15 @@ import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import ModalForm from "./modalForm";
+import "../styles/predpagemid.css"; 
+
 function AdvancedSearchModal({ errors, handleBlur, onInputChange, formData }) {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   return (
     <>
-      <Button variant="primary" onClick={handleShow}>
+      <Button variant="primary" className="btn-as-text" onClick={handleShow}>
         Advanced Search
       </Button>
       <Modal show={show} onHide={handleClose}>

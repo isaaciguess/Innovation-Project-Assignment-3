@@ -1,0 +1,28 @@
+.prediction-page-mid {
+    border-bottom: 1px solid #ddd; /* Subtle bottom border */
+    padding: 20px 0; /* Add padding for vertical spacing */
+}
+
+
+.click-to-predict-text {
+    font-size: 1.5rem;
+    font-weight: 400;
+    padding-left: 150px;
+    color: #333; /* Darker color for prominence */
+}
+
+.advanced-search-button{
+    font-size: 1rem;
+    font-weight: bold;
+    background-color: #007bff; /* Bootstrap primary color */
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+
+.advanced-search-button:hover {
+    background-color: #0056b3; /* Darken on hover */
+}
