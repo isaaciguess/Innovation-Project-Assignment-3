@@ -57,9 +57,9 @@ const compatibleFeatures = {
 
     return (
       <div>
-        <Container>
-        <h1>Analytics</h1>
-        </Container>
+    <Container className="d-flex justify-content-center align-items-center" style={{ height: '12vh' }}>
+      <h1>Analytics</h1>
+    </Container>
         <Container>
           <ChartSelection features={filteredFeatures} formData={formData} onInputChange={handleInputChange}/>
         </Container>
