@@ -1,0 +1,11 @@
+.form-control {
+    height: 60px; /* Increase the height of the input fields */
+    padding: 10px 15px; /* Add padding for a larger appearance */
+    font-size: 16px; /* Increase font size */
+  }
+  
+  .form-select {
+    height: 60px; /* Match the height of other input fields */
+    padding: 10px 15px;
+    font-size: 16px;
+  }

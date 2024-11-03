@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 
+
 function ModalForm({ errors, handleBlur, onInputChange, formData }) {
   const [suburbs, setSuburbs] = useState([null]);
   const [propertyTypes, setPropertyTypes] = useState([]);

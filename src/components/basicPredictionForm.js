@@ -4,6 +4,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { useState } from 'react';
 import { useEffect } from 'react';  
+import '../styles/basicprediction.css'
 /*
 This is the basic prediction form component, all fields are required
 * This component is a form that allows the user to input the following fields:
@@ -43,6 +44,7 @@ export function BasicPredictionForm({ errors, handleBlur, formData, onInputChang
                 value={formData.bedrooms}
                 onChange={onInputChange}
                 type="number"
+                className="form-control"
               >
                 <option value="1">1</option>
                 <option value="2">2</option>
@@ -64,6 +66,7 @@ export function BasicPredictionForm({ errors, handleBlur, formData, onInputChang
                 type="number"
                 onBlur={handleBlur}
                 isInvalid={!!errors.bathrooms}
+                className="form-select"
               >
                 <option value="1">1</option>
                 <option value="2">2</option>
@@ -90,6 +93,7 @@ export function BasicPredictionForm({ errors, handleBlur, formData, onInputChang
                 onChange={onInputChange}
                 onBlur={handleBlur}
                 isInvalid={!!errors.squareMeters}
+                className="form-control"
               />
               <Form.Control.Feedback type="invalid">
                 {errors.squareMeters}
@@ -108,6 +112,7 @@ export function BasicPredictionForm({ errors, handleBlur, formData, onInputChang
                 onChange={onInputChange}
                 onBlur={handleBlur}
                 isInvalid={!!errors.distanceFromCBD}
+                className="form-control"
               />
               <Form.Control.Feedback type="invalid">
                 {errors.squareMeters}
@@ -129,6 +134,7 @@ export function BasicPredictionForm({ errors, handleBlur, formData, onInputChang
                 onChange={onInputChange}
                 onBlur={handleBlur}
                 isInvalid={!!errors.numPark}
+                className="form-control"
               />
               <Form.Control.Feedback type="invalid">
                 {errors.numPark}
@@ -148,6 +154,7 @@ export function BasicPredictionForm({ errors, handleBlur, formData, onInputChang
                 onChange={onInputChange}
                 onBlur={handleBlur}
                 isInvalid={!!errors.subLong}
+                className="form-control"
               />
               <Form.Control.Feedback type="invalid">
                 {errors.subLong}
