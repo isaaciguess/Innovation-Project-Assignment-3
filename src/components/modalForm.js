@@ -7,7 +7,8 @@ import Form from "react-bootstrap/Form";
 function ModalForm({ errors, handleBlur, onInputChange, formData }) {
   const [suburbs, setSuburbs] = useState([null]);
   const [propertyTypes, setPropertyTypes] = useState([]);
-
+  const [suburbSearch, setSuburbSearch] = useState(""); // For search input
+  const [showSuggestions, setShowSuggestions] = useState(false);
 
   // Fetch suburbs and property types when the component mounts
   useEffect(() => {
@@ -23,6 +24,16 @@ function ModalForm({ errors, handleBlur, onInputChange, formData }) {
       .then(data => setPropertyTypes(data.type)) // assuming data has a "property_types" key containing a list of property types
       .catch(error => console.error('Error fetching property types:', error));
   }, []);
+
+  const filteredSuburbs = suburbs.filter(
+    (suburb) => suburb && suburb.toLowerCase().includes(suburbSearch.toLowerCase())
+  );
+
+  const handleSelectSuburb = (suburb) => {
+    setSuburbSearch(suburb);
+    onInputChange({ target: { name: "suburb", value: suburb } });
+    setShowSuggestions(false); // Hide suggestions after selection
+  };
 
   return (
     <>
@@ -124,24 +135,40 @@ function ModalForm({ errors, handleBlur, onInputChange, formData }) {
             </Form.Group>
           </div>
 
-          <div className="col-md-6">
-            <Form.Group className="mb-3" controlId="suburb">
-              <Form.Label> Suburb</Form.Label>
-              <Form.Select
-                type="text"
-                placeholder="Suburb"
-                name="suburb"
-                value={formData.suburb}
-                onChange={onInputChange}
-              >
-              <option value="">Select Suburb</option>
-              {suburbs && suburbs.map((suburb, index) => (
-                <option key={index} value={suburb}>
-                  {suburb}
-                </option>
-              ))}
-              </Form.Select>  
-            </Form.Group>
+        {/* Suburb Searchable Dropdown */}
+        <div className="col-md-6">
+          <Form.Group className="mb-3" controlId="suburb">
+            <Form.Label>Suburb</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="Search Suburb"
+              value={suburbSearch}
+              onChange={(e) => {
+                setSuburbSearch(e.target.value);
+                setShowSuggestions(true); // Show suggestions as user types
+              }}
+              onFocus={() => setShowSuggestions(true)} // Show suggestions on focus
+            />
+
+            {/* Suggestions Dropdown */}
+            {showSuggestions && suburbSearch && (
+              <div className="suggestions-dropdown">
+                {filteredSuburbs.length > 0 ? (
+                  filteredSuburbs.map((suburb, index) => (
+                    <div
+                      key={index}
+                      className="suggestion-item"
+                      onClick={() => handleSelectSuburb(suburb)}
+                    >
+                      {suburb}
+                    </div>
+                  ))
+                ) : (
+                  <div className="suggestion-item disabled">No suburbs found</div>
+                )}
+              </div>
+            )}
+          </Form.Group>
           </div>
         </div>
       </Form>
