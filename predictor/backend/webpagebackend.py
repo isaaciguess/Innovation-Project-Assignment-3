@@ -16,6 +16,7 @@ allow_methods=["*"],
 allow_headers=["*"],
 )
 
+
 class PredictionInput(BaseModel):
 # Field defines constraints for input validation
     num_bath: float = Field(..., description="Number of bathrooms")
@@ -29,33 +30,42 @@ class PredictionInput(BaseModel):
     suburb_lat: float = Field(..., description="Suburb Latitude")   
     suburb_population: float = Field(..., description="Suburb Population")
 
+# Define enpoint to get the list of suburbs
 @app.get("/get_suburbs")
 async def get_suburbs():
+    # Get the Pathc
     current_dir = os.getcwd()
     relative_path = os.path.join("src\\assets\\data", "suburbs.csv")
     path = os.path.join(current_dir, relative_path)
+    # Read the CSV file into a pandas DataFrame
     df = pd.read_csv(path)
     data =  df.to_dict(orient="list")
-    print(data)
+    # Return the data as a dictionary
     return data
 
 @app.get("/get_property_types")
 async def get_property_types():
+    # Get the current working directory
     current_dir = os.getcwd()
     relative_path = os.path.join("src\\assets\\data", "types.csv")
     path = os.path.join(current_dir, relative_path)
+    # Read the CSV file into a pandas DataFrame
     df = pd.read_csv(path)
     data =  df.to_dict(orient="list")
+    # Return the data as a dictionary
     return data
 
 @app.get("/get_chart_data")
 async def get_data():
+    # Get the Path
     current_dir = os.getcwd()
     relative_path = os.path.join("src\\assets\\data", "filtered_file.csv")
     path = os.path.join(current_dir, relative_path)
+    # Read the CSV file into a pandas DataFrame
     df = pd.read_csv(path)
     data =  df.to_dict(orient="list")
 
+    # Update the keys to more descriptive names
     updated_keys = {
         "num_bed": "Number of Bedrooms",
         "num_bath": "Number of Bathrooms",
@@ -71,8 +81,10 @@ async def get_data():
         "type": "Property Type" 
     }
 
+    # Update the keys in the data dictionary
     data = {updated_keys.get(k, k): v for k, v in data.items()}
 
+    # Return the data as a dictionary
     return data
 
 

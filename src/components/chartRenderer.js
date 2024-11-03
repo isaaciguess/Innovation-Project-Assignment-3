@@ -70,7 +70,13 @@ function ChartRenderer({ formData, chartData }) {
   };
 
   return (
+
     <div>
+      {/* Render the selected chart */}
+      {/* Bar chart */}
+      {/* Chart options */}
+      {/* Responsive: true - make the chart responsive */}
+      {/* Plugins: title - display the title of the chart */}
       {chart === "bar" && (
         <Bar
           data={{
@@ -83,6 +89,7 @@ function ChartRenderer({ formData, chartData }) {
               },
             ],
           }}
+
           options={{
             responsive: true,
             plugins: {
@@ -95,6 +102,11 @@ function ChartRenderer({ formData, chartData }) {
         />
       )}
 
+      {/* Pie chart */}
+      {/* Chart options */}
+      {/* Responsive: true - make the chart responsive */}
+      {/* AspectRatio: 1.5 - set the aspect ratio of the chart */}
+      {/* Plugins: title - display the title of the chart */}
       {chart === "pie" && (
         <Pie
           data={{
@@ -125,6 +137,12 @@ function ChartRenderer({ formData, chartData }) {
         />
       )}
 
+      {/* Scatter plot */}
+      {/* Chart options */}
+      {/* Responsive: true - make the chart responsive */}
+      {/* Plugins: title - display the title of the chart */}
+      {/* Scales: x - set the x-axis scale */}
+      {/* Scales: y - set the y-axis scale */}
       {chart === "scatter" && (
         <Scatter
           data={scatterChartData}

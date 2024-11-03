@@ -6,12 +6,14 @@ import { useEffect, useState } from "react";
 
 function AnalyticsPage(props) {
 
+  // Define state variables
   const [filteredFeatures, setFilteredFeatures] = useState([]);
   const [formData, setFormData] = React.useState({
     chart: 'bar',
     feature: 'Number of Bedrooms'
   })
 
+  // Fetch chart data from the server
   const [chartData, setChartData] = useState([null]);
   useEffect(() => {
     fetch("http://localhost:8000/get_chart_data")
@@ -44,9 +46,7 @@ function AnalyticsPage(props) {
       ...prevData,
       [name]: value,
     }));
-  }
-
-
+  };
 
   // Define compatible features for each chart type
   const compatibleFeatures = {
@@ -60,9 +60,11 @@ function AnalyticsPage(props) {
       <Container className="d-flex justify-content-center align-items-center" style={{ height: '12vh' }}>
         <h1>Analytics</h1>
       </Container>
+      {/* Render the chart selection form */}
       <Container>
         <ChartSelection features={filteredFeatures} formData={formData} onInputChange={handleInputChange} />
       </Container>
+      {/* Render the chart */}
       <Container>
         <ChartRenderer formData={formData} chartData={chartData} />
       </Container>

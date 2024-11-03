@@ -4,7 +4,6 @@ import { useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 
-
 function ModalForm({ errors, handleBlur, onInputChange, formData }) {
   const [suburbs, setSuburbs] = useState([null]);
   const [propertyTypes, setPropertyTypes] = useState([]);
@@ -26,10 +25,12 @@ function ModalForm({ errors, handleBlur, onInputChange, formData }) {
       .catch(error => console.error('Error fetching property types:', error));
   }, []);
 
+  // Filter suburbs based on search input
   const filteredSuburbs = suburbs.filter(
     (suburb) => suburb && suburb.toLowerCase().includes(suburbSearch.toLowerCase())
   );
 
+  // Handle suburb selection from suggestions
   const handleSelectSuburb = (suburb) => {
     setSuburbSearch(suburb);
     onInputChange({ target: { name: "suburb", value: suburb } });
@@ -177,4 +178,4 @@ function ModalForm({ errors, handleBlur, onInputChange, formData }) {
   );
 }
 
-export default ModalForm
+export default ModalForm;

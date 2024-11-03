@@ -7,6 +7,8 @@ import ModalForm from "./modalForm";
 import "../styles/predpagemid.css"; 
 
 function AdvancedSearchModal({ errors, handleBlur, onInputChange, formData }) {
+
+  // Open and close modal controls.
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -20,6 +22,8 @@ function AdvancedSearchModal({ errors, handleBlur, onInputChange, formData }) {
           <Modal.Title>Advanced Options</Modal.Title>
         </Modal.Header>
         <Modal.Body>
+          {/* Modal form component */}
+          {/* Pass the props to the ModalForm component */}
           <ModalForm errors={errors} handleBlur={handleBlur} onInputChange={onInputChange} formData={formData} />
         </Modal.Body>
         <Modal.Footer>

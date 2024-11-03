@@ -6,6 +6,8 @@ import { Container, Row, Col, Button } from 'react-bootstrap';
 import AdvancedSearchModal from './advancedSearchModal';
 
 const PredictionPageMid = ({ errors, handleBlur, onInputChange, formData }) => {
+    // Render the middle section of the prediction page
+    // Call the AdvancedSearchModal component to display a button to open the modal form
     return (
         <>
             <Container fluid className="d-flex align-items-center justify-content-center p-0 prediction-page-mid" style={{height:"14vh"}}>

@@ -161,6 +161,8 @@ function PredictionPage(props){
   const handleSubmit = (e) => {
     e.preventDefault(); // Prevent the default form submission
 
+    // Define the combined data object
+    // Fill in the missing fields with default values for adbanced form data
     const combinedData = {
       num_bed: parseFloat(basicFormData.bedrooms),
       num_bath: parseFloat(basicFormData.bathrooms),
@@ -174,6 +176,7 @@ function PredictionPage(props){
       suburb_population: parseFloat(advancedFormData.subPop || 7616.0),
     };
 
+    // Send a POST request to the server with the combined data
     fetch('http://localhost:8000/run_model', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -182,12 +185,14 @@ function PredictionPage(props){
       .then((response) => response.json())
       .then((data) => {
         console.log('Predicted price:', data.predicted_price);
+        // Set the predicted price in the state
         setPredictedPrice(data.predicted_price);
       })
       .catch((error) => {
         console.error('Error:', error);
       });
 
+    // Reset the form data 
     setBasicFormData({
       bedrooms: '1',
       bathrooms: '1',
@@ -196,7 +201,7 @@ function PredictionPage(props){
       numPark: '',
       subLong: '',
     });
-  
+    
     setAdvancedFormData({
       subSkm: '',
       mdIncome: '',
@@ -205,6 +210,7 @@ function PredictionPage(props){
     });
   };
 
+  // page structure and props
   return (
     <>
       <div className="container-fluid p-0">

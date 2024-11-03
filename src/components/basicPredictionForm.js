@@ -5,20 +5,11 @@ import Form from 'react-bootstrap/Form';
 import { useState } from 'react';
 import { useEffect } from 'react';  
 import '../styles/basicprediction.css'
-/*
-This is the basic prediction form component, all fields are required
-* This component is a form that allows the user to input the following fields:
-* 1. Bedrooms: Dropdown with options 1, 2, 3, 4, 5 and text input for custom values, must be integer
-* 2. Bathrooms: Dropdown with options 1, 2, 3, 4, 5 and text input for custom values, must be integer
-* 3. Square Meters: Text input for custom values, must be integer
-* 4. Distance from the CBD: Text input for custom values, must be float
-* 5. Year Built: Text input for custom values, must be integer
-* 6. Suburb: Search Dropdown with options from a list of suburbs, must be string
-*/
 
-
+// component for the basic prediction form component
 export function BasicPredictionForm({ errors, handleBlur, formData, onInputChange, onSubmit }) {
   {
+    // Tracks if the form has valid input, used to enable/disable the submit button
     const [isFormValid, setIsFormValid] = useState(false);
 
     // Check form validity whenever formData or errors change
@@ -31,6 +22,9 @@ export function BasicPredictionForm({ errors, handleBlur, formData, onInputChang
   
       checkFormValidity();
     }, [formData, errors]);
+
+    // OnBlur meaning: when the user leaves the input field
+    // !!errors.field meaning: if there is an error message for the field
   
     return (
       <Form onSubmit={onSubmit}>
@@ -46,6 +40,7 @@ export function BasicPredictionForm({ errors, handleBlur, formData, onInputChang
                 type="number"
                 className="form-control"
               >
+                {/* Options for number of bedrooms */}
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
@@ -68,12 +63,14 @@ export function BasicPredictionForm({ errors, handleBlur, formData, onInputChang
                 isInvalid={!!errors.bathrooms}
                 className="form-select"
               >
+                {/* Options for number of bathrooms */}
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
                 <option value="4">4</option>
                 <option value="5">5</option>
               </Form.Select>
+              {/* Render Error message for bathrooms */}
               <Form.Control.Feedback type="invalid">
                 {errors.bathrooms}
               </Form.Control.Feedback>
@@ -85,6 +82,7 @@ export function BasicPredictionForm({ errors, handleBlur, formData, onInputChang
           <div className="col-md-6">
             <Form.Group className="mb-3" controlId="squareMeters">
               <Form.Label> Square Meters</Form.Label>
+              {/* Input field for square meters */}
               <Form.Control
                 name="squareMeters"
                 type="string"
@@ -95,6 +93,7 @@ export function BasicPredictionForm({ errors, handleBlur, formData, onInputChang
                 isInvalid={!!errors.squareMeters}
                 className="form-control"
               />
+              {/* Render Error message for square meters */}
               <Form.Control.Feedback type="invalid">
                 {errors.squareMeters}
               </Form.Control.Feedback>
@@ -104,6 +103,7 @@ export function BasicPredictionForm({ errors, handleBlur, formData, onInputChang
           <div className="col-md-6">
             <Form.Group className="mb-3" controlId="distanceFromCBD">
               <Form.Label> Distance from CBD</Form.Label>
+              {/* Input field for distance from CBD */}
               <Form.Control
                 name='distanceFromCBD'
                 type="number"
@@ -114,6 +114,7 @@ export function BasicPredictionForm({ errors, handleBlur, formData, onInputChang
                 isInvalid={!!errors.distanceFromCBD}
                 className="form-control"
               />
+              {/* Render Error message for distance from CBD */}
               <Form.Control.Feedback type="invalid">
                 {errors.squareMeters}
               </Form.Control.Feedback>
@@ -126,6 +127,7 @@ export function BasicPredictionForm({ errors, handleBlur, formData, onInputChang
           <div className="col-md-6">
             <Form.Group className="mb-3" controlId="numPark">
               <Form.Label> Number of Parks </Form.Label>
+              {/* Input field for number of parks */}
               <Form.Control
                 name="numPark"
                 type="number"
@@ -136,16 +138,17 @@ export function BasicPredictionForm({ errors, handleBlur, formData, onInputChang
                 isInvalid={!!errors.numPark}
                 className="form-control"
               />
+              {/* Render Error message for number of parks */}
               <Form.Control.Feedback type="invalid">
                 {errors.numPark}
               </Form.Control.Feedback>
             </Form.Group>
-
           </div>
 
           <div className="col-md-6">
             <Form.Group className="mb-3" controlId="subLong">
               <Form.Label> Suburb Longtitude </Form.Label>
+              {/* Input field for suburb longitude */}
               <Form.Control
                 name="subLong"
                 type="number"
@@ -156,6 +159,7 @@ export function BasicPredictionForm({ errors, handleBlur, formData, onInputChang
                 isInvalid={!!errors.subLong}
                 className="form-control"
               />
+              {/* Render Error message for suburb longitude */}
               <Form.Control.Feedback type="invalid">
                 {errors.subLong}
               </Form.Control.Feedback>
@@ -163,6 +167,8 @@ export function BasicPredictionForm({ errors, handleBlur, formData, onInputChang
           </div>
         </div>
 
+      {/* Submit button */}
+      {/* Disable the button if the form is invalid */}
       <Button 
         variant="primary" 
         type="submit" 

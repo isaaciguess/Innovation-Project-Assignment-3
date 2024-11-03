@@ -3,6 +3,8 @@ import React from "react";
 import Bootstrap from "bootstrap"
 import Form from 'react-bootstrap/Form';
 function ChartSelection({ features, formData, onInputChange }) {
+
+  // Return a form with a dropdown to select the chart type and another dropdown to select the feature
   return (
     <Form>
       <div className="row g-3">
@@ -15,6 +17,7 @@ function ChartSelection({ features, formData, onInputChange }) {
               value={formData.chart}
               onChange={onInputChange}
             >
+            {/* Options for the chart type */}
               <option value="bar">Bar Chart</option>
               <option value="scatter">Scatter Plot Price Correlation</option>
               <option value="pie">Pie Chart</option>
@@ -31,6 +34,7 @@ function ChartSelection({ features, formData, onInputChange }) {
               value={formData.feature}
               onChange={onInputChange}
             >
+            {/* Map through the features and create an option for each feature */}
               {features.map((feature) => (
                 <option key={feature} value={feature}>
                   {feature.charAt(0).toUpperCase() + feature.slice(1)}
