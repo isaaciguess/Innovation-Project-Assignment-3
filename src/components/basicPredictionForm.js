@@ -3,6 +3,7 @@ import React from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { useState } from 'react';
+import { useEffect } from 'react';  
 /*
 This is the basic prediction form component, all fields are required
 * This component is a form that allows the user to input the following fields:
@@ -17,6 +18,19 @@ This is the basic prediction form component, all fields are required
 
 export function BasicPredictionForm({ errors, handleBlur, formData, onInputChange, onSubmit }) {
   {
+    const [isFormValid, setIsFormValid] = useState(false);
+
+    // Check form validity whenever formData or errors change
+    useEffect(() => {
+      const checkFormValidity = () => {
+        const hasErrors = Object.values(errors).some(error => error); // Any field with an error message
+        const hasEmptyFields = Object.values(formData).some(value => !value); // Any empty field
+        setIsFormValid(!hasErrors && !hasEmptyFields);
+      };
+  
+      checkFormValidity();
+    }, [formData, errors]);
+  
     return (
       <Form onSubmit={onSubmit}>
         <div className="row g-3">
@@ -142,7 +156,14 @@ export function BasicPredictionForm({ errors, handleBlur, formData, onInputChang
           </div>
         </div>
 
-        <Button variant="primary" type="submit" className="btn btn-primary btn-lg btn-block w-100">Submit</Button>
+      <Button 
+        variant="primary" 
+        type="submit" 
+        className={`btn btn-lg w-100 ${!isFormValid ? 'btn-secondary' : 'btn-primary'}`} 
+        disabled={!isFormValid}
+      >
+        Submit
+      </Button>
       </Form>
     );
   }

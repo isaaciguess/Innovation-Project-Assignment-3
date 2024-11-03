@@ -13,7 +13,7 @@ const PredictionPageMid = ({ errors, handleBlur, onInputChange, formData }) => {
                 <Row className="w-100 m-0">
                     {/* Centered Column */}
                     <Col className="d-flex justify-content-center p-0 " >
-                        <p className="m-0 click-to-predict-text">Click to Predict Price range</p>
+                        <p className="m-0 click-to-predict-text">Complete Form To Predict Price</p>
                     </Col>
 
                     {/* Right-Aligned Column */}

@@ -29,6 +29,25 @@ class PredictionInput(BaseModel):
     suburb_lat: float = Field(..., description="Suburb Latitude")   
     suburb_population: float = Field(..., description="Suburb Population")
 
+@app.get("/get_suburbs")
+async def get_suburbs():
+    current_dir = os.getcwd()
+    relative_path = os.path.join("src\\assets\\data", "suburbs.csv")
+    path = os.path.join(current_dir, relative_path)
+    df = pd.read_csv(path)
+    data =  df.to_dict(orient="list")
+
+    return data
+
+@app.get("/get_property_types")
+async def get_property_types():
+    current_dir = os.getcwd()
+    relative_path = os.path.join("src\\assets\\data", "property_types.csv")
+    path = os.path.join(current_dir, relative_path)
+    df = pd.read_csv(path)
+    data =  df.to_dict(orient="list")
+
+    return data
 
 
 @app.get("/get_chart_data")
