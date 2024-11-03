@@ -1,15 +1,15 @@
-import React, { useState } from "react"; 
-import AdvancedSearchModal from "../components/advancedSearchModal"; 
+import React, { useState } from "react";
+import AdvancedSearchModal from "../components/advancedSearchModal";
 import BasicPredictionForm from "../components/basicPredictionForm";
 import PriceRangeBanner from "../components/banner";
 import { Container } from "react-bootstrap";
 import PredictionPageMid from "../components/predPageMid";
 
-function PredictionPage(props){
-  const [predictedPrice, setPredictedPrice] = useState(null); 
+function PredictionPage(props) {
+  const [predictedPrice, setPredictedPrice] = useState(null);
   const [errors, setErrors] = useState({});
 
-  const [basicFormData, setBasicFormData] = useState({ 
+  const [basicFormData, setBasicFormData] = useState({
     bedrooms: '1',
     bathrooms: '1',
     squareMeters: '',
@@ -27,7 +27,7 @@ function PredictionPage(props){
 
   const validateField = (name, value) => {
     let error = '';
-    
+
     switch (name) {
       case 'bedrooms':
         if (!value) {
@@ -38,7 +38,7 @@ function PredictionPage(props){
           error = 'Bedrooms must be greater than 0 and less than 5.';
         }
         break;
-  
+
       case 'bathrooms':
         if (!value) {
           error = 'Bathrooms is required.';
@@ -48,7 +48,7 @@ function PredictionPage(props){
           error = 'Bathrooms must be greater than 0 and less than 5.';
         }
         break;
-  
+
       case 'squareMeters':
         if (!value) {
           error = 'Square Meters is required.';
@@ -59,7 +59,7 @@ function PredictionPage(props){
           error = 'Square Meters must be greater than 20.';
         }
         break;
-  
+
       case 'numPark':
         if (!value) {
           error = 'Number of Parks is required.';
@@ -69,17 +69,17 @@ function PredictionPage(props){
           error = 'Number of Parks must be greater than 0 and less than 5.';
         }
         break;
-  
+
       case 'distanceFromCBD':
         if (!value) {
           error = 'Distance from CBD is required.';
         } else if (isNaN(value)) {
           error = 'Distance From CBD must be a number.';
         } else if (parseFloat(value) <= 1) {
-          error = 'Distance from CBD must be between 1 and 100'; 
+          error = 'Distance from CBD must be between 1 and 100';
         }
         break;
-  
+
       case 'subLong':
         if (!value) {
           error = 'Suburb Longitude is required.';
@@ -87,43 +87,43 @@ function PredictionPage(props){
           error = 'Suburb Longitude must be a number.';
         }
         break;
-      
-        case 'subLong':
-          if (isNaN(value)) {
-            error = 'Suburb Longitude must be a float.';
-          }
-          break;
-    
-        case 'subSkm':
-          if (isNaN(value) || !Number.isInteger(parseFloat(value))) {
-            error = 'Suburb Area (sq km) must be an integer.';
-          } else if (parseInt(value) < 2 || parseInt(value) > 100) {
-            error = 'Suburb Area (sq km) must be between 2 and 100.';
-          }
-          break;
-    
-        case 'mdIncome':
-          if (isNaN(value) || !Number.isInteger(parseFloat(value))) {
-            error = 'Median Income must be an integer.';
-          } else if (parseInt(value) < 20000 || parseInt(value) > 150000) {
-            error = 'Median Income must be between 20,000 and 150,000.';
-          }
-          break;
-    
-        case 'subLat':
-          if (isNaN(value)) {
-            error = 'Suburb Latitude must be a float.';
-          }
-          break;
-    
-        case 'subPop':
-          if (isNaN(value) || !Number.isInteger(parseFloat(value))) {
-            error = 'Suburb Population must be an integer.';
-          } else if (parseInt(value) < 500 || parseInt(value) > 100000) {
-            error = 'Suburb Population must be between 500 and 100,000.';
-          }
-          break;
-  
+
+      case 'subLong':
+        if (isNaN(value)) {
+          error = 'Suburb Longitude must be a float.';
+        }
+        break;
+
+      case 'subSkm':
+        if (isNaN(value) || !Number.isInteger(parseFloat(value))) {
+          error = 'Suburb Area (sq km) must be an integer.';
+        } else if (parseInt(value) < 2 || parseInt(value) > 100) {
+          error = 'Suburb Area (sq km) must be between 2 and 100.';
+        }
+        break;
+
+      case 'mdIncome':
+        if (isNaN(value) || !Number.isInteger(parseFloat(value))) {
+          error = 'Median Income must be an integer.';
+        } else if (parseInt(value) < 20000 || parseInt(value) > 150000) {
+          error = 'Median Income must be between 20,000 and 150,000.';
+        }
+        break;
+
+      case 'subLat':
+        if (isNaN(value)) {
+          error = 'Suburb Latitude must be a float.';
+        }
+        break;
+
+      case 'subPop':
+        if (isNaN(value) || !Number.isInteger(parseFloat(value))) {
+          error = 'Suburb Population must be an integer.';
+        } else if (parseInt(value) < 500 || parseInt(value) > 100000) {
+          error = 'Suburb Population must be between 500 and 100,000.';
+        }
+        break;
+
       default:
         break;
     }
@@ -196,7 +196,7 @@ function PredictionPage(props){
       numPark: '',
       subLong: '',
     });
-  
+
     setAdvancedFormData({
       subSkm: '',
       mdIncome: '',
@@ -208,26 +208,26 @@ function PredictionPage(props){
   return (
     <>
       <div className="container-fluid p-0">
-          <PriceRangeBanner predictedPrice={predictedPrice}/>
+        <PriceRangeBanner predictedPrice={predictedPrice} />
       </div>
       <Container fluid style={{ height: '10vh' }}>
-        <PredictionPageMid 
-        errors={errors} 
-        handleBlur={handleBlur} 
-        onInputChange={handleAdvancedFormChange} 
-        formData={advancedFormData}/>
+        <PredictionPageMid
+          errors={errors}
+          handleBlur={handleBlur}
+          onInputChange={handleAdvancedFormChange}
+          formData={advancedFormData} />
       </Container>
 
       <div className="prediction-page">
-      <Container>
-        <BasicPredictionForm 
-          errors={errors} 
-          handleBlur={handleBlur} 
-          formData={basicFormData} 
-          onInputChange={handleBasicFormChange} 
-          onSubmit={handleSubmit}
-        />
-      </Container>
+        <Container>
+          <BasicPredictionForm
+            errors={errors}
+            handleBlur={handleBlur}
+            formData={basicFormData}
+            onInputChange={handleBasicFormChange}
+            onSubmit={handleSubmit}
+          />
+        </Container>
       </div>
     </>
   );

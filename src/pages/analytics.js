@@ -12,16 +12,16 @@ function AnalyticsPage(props) {
     feature: 'Number of Bedrooms'
   })
 
-    const[chartData, setChartData] = useState([null]);
-    useEffect(() => {
-      fetch("http://localhost:8000/get_chart_data")
-        .then(response => response.json())
-        .then(data => setChartData(data))
-        .catch(error => console.error("Error fetching data:", error));
-    }, []);
+  const [chartData, setChartData] = useState([null]);
+  useEffect(() => {
+    fetch("http://localhost:8000/get_chart_data")
+      .then(response => response.json())
+      .then(data => setChartData(data))
+      .catch(error => console.error("Error fetching data:", error));
+  }, []);
 
 
-      // Update filtered features based on selected chart type
+  // Update filtered features based on selected chart type
   useEffect(() => {
     if (formData.chart) {
       const compatible = compatibleFeatures[formData.chart] || [];
@@ -37,36 +37,36 @@ function AnalyticsPage(props) {
     }
   }, [formData.chart, chartData]); // Run whenever chart type or data changes
 
-    const handleInputChange = (e) => {
-      const { name, value } = e.target;
-      console.log(`chart: ${formData.chart} \nfeature: ${formData.feature}`);
-      setFormData((prevData) => ({
-        ...prevData,
-        [name]: value,
-      }));
-    }
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    console.log(`chart: ${formData.chart} \nfeature: ${formData.feature}`);
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  }
 
 
 
-// Define compatible features for each chart type
-const compatibleFeatures = {
-  bar: ["Number of Bedrooms", "Number of Bathrooms",  "Number of Car Spaces", "Property Type" ],
-  pie: ["Number of Bedrooms", "Number of Bathrooms",  "Number of Car Spaces", "Property Type" ],
-  scatter: ["Suburb Longitude", "Suburb Latitude", "Distance from CBD (km)", "Property Size (sqm)", "Suburb Population", "Suburb Median Income"]
-};
+  // Define compatible features for each chart type
+  const compatibleFeatures = {
+    bar: ["Number of Bedrooms", "Number of Bathrooms", "Number of Car Spaces", "Property Type"],
+    pie: ["Number of Bedrooms", "Number of Bathrooms", "Number of Car Spaces", "Property Type"],
+    scatter: ["Suburb Longitude", "Suburb Latitude", "Distance from CBD (km)", "Property Size (sqm)", "Suburb Population", "Suburb Median Income"]
+  };
 
-    return (
-      <div>
-    <Container className="d-flex justify-content-center align-items-center" style={{ height: '12vh' }}>
-      <h1>Analytics</h1>
-    </Container>
-        <Container>
-          <ChartSelection features={filteredFeatures} formData={formData} onInputChange={handleInputChange}/>
-        </Container>
-        <Container>
+  return (
+    <div>
+      <Container className="d-flex justify-content-center align-items-center" style={{ height: '12vh' }}>
+        <h1>Analytics</h1>
+      </Container>
+      <Container>
+        <ChartSelection features={filteredFeatures} formData={formData} onInputChange={handleInputChange} />
+      </Container>
+      <Container>
         <ChartRenderer formData={formData} chartData={chartData} />
-        </Container>
-      </div>
+      </Container>
+    </div>
   );
 }
 export default AnalyticsPage;
