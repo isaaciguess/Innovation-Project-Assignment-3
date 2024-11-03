@@ -2,7 +2,7 @@
 import React from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-
+import { useState } from 'react';
 /*
 This is the basic prediction form component, all fields are required
 * This component is a form that allows the user to input the following fields:
@@ -15,9 +15,8 @@ This is the basic prediction form component, all fields are required
 */
 
 
-export function BasicPredictionForm({formData, onInputChange, onSubmit}){
+export function BasicPredictionForm({errors, handleBlur, formData, onInputChange, onSubmit}){
   {
-
     return (
       <Form onSubmit={onSubmit}>
       <div className="row g-3">
@@ -49,6 +48,8 @@ export function BasicPredictionForm({formData, onInputChange, onSubmit}){
           value={formData.bathrooms}
           onChange={onInputChange}
           type="number"
+          onBlur={handleBlur}
+          isInvalid={!!errors.bathrooms}
           >
           <option value="1">1</option>
           <option value="2">2</option>
@@ -56,23 +57,31 @@ export function BasicPredictionForm({formData, onInputChange, onSubmit}){
           <option value="4">4</option>
           <option value="5">5</option>
           </Form.Select>
+          <Form.Control.Feedback type="invalid">
+            {errors.bathrooms}
+          </Form.Control.Feedback>
         </Form.Group>
         </div>
       </div>
 
       <div className="row g-3">
         <div className="col-md-6">
-        <Form.Group className="mb-3" controlId="squareMeters">
-          <Form.Label> Square Meters</Form.Label>
-          <Form.Control 
-          name='squareMeters'
-          type="number" 
-          placeholder="Enter Size (sqm)" 
-          value={formData.squareMeters}
-          onChange={onInputChange}
-          />
-        </Form.Group>
-      </div>
+          <Form.Group className="mb-3" controlId="squareMeters">
+            <Form.Label> Square Meters</Form.Label>
+            <Form.Control
+              name="squareMeters"
+              type="string"
+              placeholder="Enter Size (sqm)"
+              value={formData.squareMeters}
+              onChange={onInputChange}
+              onBlur={handleBlur}
+              isInvalid={!!errors.squareMeters}
+            />
+            <Form.Control.Feedback type="invalid">
+              {errors.squareMeters}
+            </Form.Control.Feedback>
+          </Form.Group>
+        </div>
 
         <div className="col-md-6">
         <Form.Group className="mb-3" controlId="distanceFromCBD">
@@ -83,7 +92,12 @@ export function BasicPredictionForm({formData, onInputChange, onSubmit}){
           placeholder="Enter Distance From CBD"
           value={formData.distanceFromCBD}
           onChange={onInputChange}          
+          onBlur={handleBlur}
+          isInvalid={!!errors.distanceFromCBD}
           />
+          <Form.Control.Feedback type="invalid">
+            {errors.squareMeters}
+          </Form.Control.Feedback>
         </Form.Group>
         </div>
       </div>
@@ -99,8 +113,14 @@ export function BasicPredictionForm({formData, onInputChange, onSubmit}){
           placeholder="Enter Number of Parks" 
           value={formData.numPark}
           onChange={onInputChange}
+          onBlur={handleBlur}
+          isInvalid={!!errors.numPark}
           />
+          <Form.Control.Feedback type="invalid">
+            {errors.numPark}
+          </Form.Control.Feedback>
         </Form.Group>
+        
         </div>
 
         <div className="col-md-6">
@@ -112,7 +132,12 @@ export function BasicPredictionForm({formData, onInputChange, onSubmit}){
           placeholder="Enter Suburb Longitude"
           value={formData.subLong}
           onChange={onInputChange}          
+          onBlur={handleBlur}
+          isInvalid={!!errors.subLong}
         />
+        <Form.Control.Feedback type="invalid">
+          {errors.subLong}
+        </Form.Control.Feedback>
         </Form.Group>
         </div>
         </div>

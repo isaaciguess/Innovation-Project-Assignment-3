@@ -3,7 +3,7 @@ import { Container, Row, Col, Button } from 'react-bootstrap';
 import MyModal  from './advancedSearchModal';
 import AdvancedSearchModal from './advancedSearchModal';
 
-const PredictionPageMid = ({ onInputChange, formData }) => {
+const PredictionPageMid = ({errors, handleBlur, onInputChange, formData }) => {
     return (
         <>
         <Container fluid className="d-flex align-items-center justify-content-center p-0" style={{ height: '10vh'}}>
@@ -15,7 +15,11 @@ const PredictionPageMid = ({ onInputChange, formData }) => {
         
         {/* Right-Aligned Column */}
         <Col xs="auto" className="ms-auto p-0">
-            <AdvancedSearchModal onInputChange={onInputChange} formData={formData}/>
+            <AdvancedSearchModal
+            errors={errors} 
+            handleBlur={handleBlur} 
+            onInputChange={onInputChange} 
+            formData={formData}/>
         </Col>
         </Row>
         </Container>

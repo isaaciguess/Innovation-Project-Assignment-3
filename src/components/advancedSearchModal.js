@@ -4,7 +4,7 @@ import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import ModalForm from "./modalForm";
-function AdvancedSearchModal({onInputChange, formData}) {
+function AdvancedSearchModal({errors, handleBlur, onInputChange, formData}) {
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -18,7 +18,7 @@ function AdvancedSearchModal({onInputChange, formData}) {
             <Modal.Title>Modal heading</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <ModalForm  onInputChange={onInputChange} formData={formData}/>
+            <ModalForm errors={errors} handleBlur={handleBlur} onInputChange={onInputChange} formData={formData}/>
           </Modal.Body>
           <Modal.Footer>
             <Button variant="secondary" onClick={handleClose}>

@@ -4,7 +4,7 @@ import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 
-function ModalForm({onInputChange, formData}) {
+function ModalForm({errors, handleBlur, onInputChange, formData}) {
   return (
     <>
       <Form>
@@ -18,7 +18,12 @@ function ModalForm({onInputChange, formData}) {
                 name="subSkm"
                 value={formData.subSkm}
                 onChange={onInputChange}
+                onBlur={handleBlur}
+                isInvalid={!!errors.subSkm}
               />
+            <Form.Control.Feedback type="invalid">
+              {errors.subSkm}
+            </Form.Control.Feedback>
             </Form.Group>
           </div>
 
@@ -31,7 +36,12 @@ function ModalForm({onInputChange, formData}) {
                 name="mdIncome"
                 value={formData.mdIncome}
                 onChange={onInputChange}
+                onBlur={handleBlur}
+                isInvalid={!!errors.mdIncome}
               />
+            <Form.Control.Feedback type="invalid">
+              {errors.mdIncome}
+            </Form.Control.Feedback>    
             </Form.Group>
           </div>
         </div>
@@ -46,20 +56,30 @@ function ModalForm({onInputChange, formData}) {
                 name="subLat"
                 value={formData.subLat}
                 onChange={onInputChange}
+                onBlur={handleBlur}
+                isInvalid={!!errors.subLat}
               />
+            <Form.Control.Feedback type="invalid">  
+              {errors.subLat}
+            </Form.Control.Feedback>
             </Form.Group>
           </div>
 
           <div className="col-md-6">
             <Form.Group className="mb-3" controlId="subPop">
-              <Form.Label> Suburb Longtitude </Form.Label>
+              <Form.Label> Suburb Population </Form.Label>
               <Form.Control 
                 type="text" 
                 placeholder="Enter Suburb Population"
                 name="subPop"
                 value={formData.subPop}
                 onChange={onInputChange}
+                onBlur={handleBlur}
+                isInvalid={!!errors.subPop}
               />
+            <Form.Control.Feedback type="invalid">
+              {errors.subPop}  
+            </Form.Control.Feedback>  
             </Form.Group>
           </div>
         </div>
@@ -72,7 +92,7 @@ function ModalForm({onInputChange, formData}) {
                 type="text" 
                 placeholder="type"
                 name="type"
-                value={formData.yearBuilt}
+                value={formData.type}
                 onChange={onInputChange}
               />
             </Form.Group>
