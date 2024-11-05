@@ -21,6 +21,7 @@ function ChartSelection({ features, formData, onInputChange }) {
               <option value="bar">Bar Chart</option>
               <option value="scatter">Scatter Plot Price Correlation</option>
               <option value="pie">Pie Chart</option>
+              <option value="box">Box Plot</option> 
             </Form.Select>
           </Form.Group>
         </div>

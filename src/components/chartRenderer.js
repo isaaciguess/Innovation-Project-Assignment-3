@@ -1,180 +1,133 @@
 import React from "react";
-import { Bar, Pie, Scatter, Chart } from "react-chartjs-2";
-import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, PointElement, LineElement, Title, Tooltip, Legend, ArcElement } from 'chart.js';
-
-ChartJS.register(CategoryScale, LinearScale, BarElement, PointElement, LineElement, Title, Tooltip, Legend, ArcElement);
+import Plot from "react-plotly.js";
 
 function ChartRenderer({ formData, chartData }) {
   const { chart, feature } = formData;
 
   // Prepare data based on feature selection
-  const featureData = chartData[feature] || [];;
+  const featureData = chartData[feature] || [];
   const priceData = chartData.Price;
-
-  console.log('Feature Data:', featureData);
-  console.log('Price Data:', priceData);
-  console.log('Chart:', chart);
-  console.log('Feature:', feature);
 
   if (!featureData.length) {
     return <p>Please select a valid feature to display the chart.</p>;
   }
 
-  // Bar chart data
-  const barChartData = {
-    labels: [...new Set(featureData)], // Unique values of the selected feature
-    datasets: [
-      {
-        label: `${feature} Count`,
-        data: featureData.reduce((counts, value) => {
-          counts[value] = (counts[value] || 0) + 1;
-          return counts;
-        }, {}),
-        backgroundColor: 'rgba(75, 192, 192, 0.6)',
-      },
-    ],
-  };
+  // Data processing for different chart types
+  const uniqueFeatureValues = [...new Set(featureData)];
+  const featureCounts = uniqueFeatureValues.map(
+    (val) => featureData.filter((item) => item === val).length
+  );
 
-  // Pie chart data
-  const pieChartData = {
-    labels: [...new Set(featureData)],
-    datasets: [
-      {
-        label: `${feature} Distribution`,
-        data: featureData.reduce((counts, value) => {
-          counts[value] = (counts[value] || 0) + 1;
-          return counts;
-        }, {}),
-        backgroundColor: [
-          'rgba(255, 99, 132, 0.6)',
-          'rgba(54, 162, 235, 0.6)',
-          'rgba(255, 206, 86, 0.6)',
-          'rgba(75, 192, 192, 0.6)',
-        ],
-      },
-    ],
-  };
-
-  // Scatter plot data
-  const scatterChartData = {
-    datasets: [
-      {
-        label: `Price vs ${feature}`,
-        data: featureData.map((val, index) => ({
-          x: val,
-          y: priceData[index],
-        })),
-        backgroundColor: 'rgba(153, 102, 255, 0.6)',
-      },
-    ],
+  const commonLayout = {
+    responsive: true,
+    width: 1300, // Set a large width
+    height: 600, // Set a large height
+    margin: { t: 60, r: 40, b: 80, l: 60 }, // Adjust margins for readability
+    font: { size: 16 }, // Increase font size for labels and titles
   };
 
   return (
-
     <div>
       {/* Render the selected chart */}
-      {/* Bar chart */}
-      {/* Chart options */}
-      {/* Responsive: true - make the chart responsive */}
-      {/* Plugins: title - display the title of the chart */}
       {chart === "bar" && (
-        <Bar
-          data={{
-            labels: Object.keys(barChartData.datasets[0].data),
-            datasets: [
-              {
-                label: `${feature} Count`,
-                data: Object.values(barChartData.datasets[0].data),
-                backgroundColor: 'rgba(75, 192, 192, 0.6)',
-              },
-            ],
-          }}
-
-          options={{
+        <Plot
+          data={[
+            {
+              x: uniqueFeatureValues,
+              y: featureCounts,
+              type: "bar",
+              marker: { color: "rgba(75, 192, 192, 0.6)" },
+            },
+          ]}
+          layout={{
+            ...commonLayout,
+            title: `Bar Chart of ${feature}`,
+            xaxis: { title: feature },
+            yaxis: { title: `${feature} Count`,
+                     standoff: 100, 
+            },
             responsive: true,
-            plugins: {
-              title: {
-                display: true,
-                text: `Bar Chart of ${feature}`,
-              },
+            transition: {
+              duration: 800, // Duration of the transition animation in ms
+              easing: "cubic-in-out", // Easing function for smooth animation
+            },
+            frame: {
+              duration: 500, // Duration of each frame in the animation sequence
             },
           }}
         />
       )}
 
-      {/* Pie chart */}
-      {/* Chart options */}
-      {/* Responsive: true - make the chart responsive */}
-      {/* AspectRatio: 1.5 - set the aspect ratio of the chart */}
-      {/* Plugins: title - display the title of the chart */}
       {chart === "pie" && (
-        <Pie
-          data={{
-            labels: Object.keys(pieChartData.datasets[0].data),
-            datasets: [
-              {
-                label: `${feature} Distribution`,
-                data: Object.values(pieChartData.datasets[0].data),
-                backgroundColor: [
-                  'rgba(255, 99, 132, 0.6)',
-                  'rgba(54, 162, 235, 0.6)',
-                  'rgba(255, 206, 86, 0.6)',
-                  'rgba(75, 192, 192, 0.6)',
+        <Plot
+          data={[
+            {
+        
+              labels: uniqueFeatureValues,
+              values: featureCounts,
+              type: "pie",
+              marker: {
+                colors: [
+                  "rgba(255, 99, 132, 0.6)",
+                  "rgba(54, 162, 235, 0.6)",
+                  "rgba(255, 206, 86, 0.6)",
+                  "rgba(75, 192, 192, 0.6)",
                 ],
               },
-            ],
-          }}
-          options={{
-            responsive: true,
-            aspectRatio: 1.5,
-            plugins: {
-              title: {
-                display: true,
-                text: `Pie Chart of ${feature} Distribution`,
-              },
             },
+          ]}
+          layout={{
+            ...commonLayout,
+            title: `Pie Chart of ${feature} Distribution`,
+            responsive: true,
           }}
         />
       )}
 
-      {/* Scatter plot */}
-      {/* Chart options */}
-      {/* Responsive: true - make the chart responsive */}
-      {/* Plugins: title - display the title of the chart */}
-      {/* Scales: x - set the x-axis scale */}
-      {/* Scales: y - set the y-axis scale */}
       {chart === "scatter" && (
-        <Scatter
-          data={scatterChartData}
-          options={{
+        <Plot
+          data={[
+            {
+     
+              x: featureData,
+              y: priceData,
+              mode: "markers",
+              type: "scatter",
+              marker: { color: "rgba(153, 102, 255, 0.6)" },
+            },
+          ]}
+          layout={{
+            ...commonLayout,
+            title: `Scatter Plot of Price vs ${feature}`,
+            xaxis: { title: feature },
+            yaxis: { title: "Price" },
             responsive: true,
-            plugins: {
-              title: {
-                display: true,
-                text: `Scatter Plot of Price vs ${feature}`,
-              },
+          }}
+        />
+      )}
+           {chart === "box" && (
+        <Plot
+          data={[
+            {
+              x: featureData,
+              y: priceData,
+              type: "box",
+              marker: { color: "rgba(54, 162, 235, 0.6)" },
+              boxpoints: false,
+              jitter: 0.3,
+              pointpos: -1.8,
             },
-            scales: {
-              x: {
-                type: 'linear',
-                position: 'bottom',
-                title: {
-                  display: true,
-                  text: feature,
-                },
-              },
-              y: {
-                title: {
-                  display: true,
-                  text: 'Price',
-                },
-              },
-            },
+          ]}
+          layout={{
+            ...commonLayout,
+            title: { text: `Box Plot of Price Distribution by ${feature}`, font: { size: 24 } },
+            xaxis: { title: { text: feature, font: { size: 18 } } },
+            yaxis: { title: { text: "Price", font: { size: 18 } } },
           }}
         />
       )}
     </div>
-  );
+     );
 }
 
 export default ChartRenderer;

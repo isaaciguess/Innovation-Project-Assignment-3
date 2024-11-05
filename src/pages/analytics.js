@@ -52,7 +52,8 @@ function AnalyticsPage(props) {
   const compatibleFeatures = {
     bar: ["Number of Bedrooms", "Number of Bathrooms", "Number of Car Spaces", "Property Type"],
     pie: ["Number of Bedrooms", "Number of Bathrooms", "Number of Car Spaces", "Property Type"],
-    scatter: ["Suburb Longitude", "Suburb Latitude", "Distance from CBD (km)", "Property Size (sqm)", "Suburb Population", "Suburb Median Income"]
+    scatter: ["Suburb Longitude", "Suburb Latitude", "Distance from CBD (km)", "Property Size (sqm)", "Suburb Population", "Suburb Median Income"],
+    box: ["Number of Bedrooms", "Number of Bathrooms", "Number of Car Spaces", "Property Type"]
   };
 
   return (

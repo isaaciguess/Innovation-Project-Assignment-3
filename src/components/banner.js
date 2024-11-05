@@ -8,7 +8,7 @@ const PriceRangeBanner = ({predictedPrice}) => {
       {/* If the predicted price is available, display it */}
       {/* Otherwise, display a message to complete the form */}   
         <div className="banner-text">
-          <h1>{predictedPrice ? `Predicted Price: $${predictedPrice}` : 'Complete Form'}</h1>
+          <h1>{predictedPrice ? `Predicted Price: $${Math.floor(predictedPrice).toLocaleString()}` : 'Complete Form'}</h1>
         </div>
       </div>
   );

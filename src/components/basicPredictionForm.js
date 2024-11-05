@@ -102,12 +102,12 @@ export function BasicPredictionForm({ errors, handleBlur, formData, onInputChang
 
           <div className="col-md-6">
             <Form.Group className="mb-3" controlId="distanceFromCBD">
-              <Form.Label> Distance from CBD</Form.Label>
+              <Form.Label> Distance from CBD in km</Form.Label>
               {/* Input field for distance from CBD */}
               <Form.Control
                 name='distanceFromCBD'
-                type="number"
-                placeholder="Enter Distance From CBD"
+                type="string"
+                placeholder="Enter Distance From CBD in km"
                 value={formData.distanceFromCBD}
                 onChange={onInputChange}
                 onBlur={handleBlur}
@@ -116,7 +116,7 @@ export function BasicPredictionForm({ errors, handleBlur, formData, onInputChang
               />
               {/* Render Error message for distance from CBD */}
               <Form.Control.Feedback type="invalid">
-                {errors.squareMeters}
+                {errors.distanceFromCBD}
               </Form.Control.Feedback>
             </Form.Group>
           </div>
@@ -126,12 +126,12 @@ export function BasicPredictionForm({ errors, handleBlur, formData, onInputChang
         <div className="row g-3">
           <div className="col-md-6">
             <Form.Group className="mb-3" controlId="numPark">
-              <Form.Label> Number of Parks </Form.Label>
+              <Form.Label> Number of Car Parks </Form.Label>
               {/* Input field for number of parks */}
               <Form.Control
                 name="numPark"
-                type="number"
-                placeholder="Enter Number of Parks"
+                type="string"
+                placeholder="Enter Number of Car Parks"
                 value={formData.numPark}
                 onChange={onInputChange}
                 onBlur={handleBlur}
@@ -151,7 +151,7 @@ export function BasicPredictionForm({ errors, handleBlur, formData, onInputChang
               {/* Input field for suburb longitude */}
               <Form.Control
                 name="subLong"
-                type="number"
+                type="string"
                 placeholder="Enter Suburb Longitude"
                 value={formData.subLong}
                 onChange={onInputChange}
